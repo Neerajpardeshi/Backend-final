@@ -100,6 +100,7 @@ public class EmployeeController
 	
 	//create api to insert admin details in admin_details table
 	@PostMapping("/insertadmin")
+	@CrossOrigin
 	public String insertAdmin(@RequestBody AdminDetails data) {
 		adminservice.saveAdminData(data);
 		return "Admin "+data.getFirstname()+" registered successfully";
@@ -107,6 +108,7 @@ public class EmployeeController
 	
 	//create api to authenticate admin using adminId and password
 	@GetMapping("/login/{id}/{password}")
+	@CrossOrigin
 	public boolean authenticateAdmin(@PathVariable int id,@PathVariable String password)
 	{
 		if(adminservice.authenticateAdminData(id,password))
