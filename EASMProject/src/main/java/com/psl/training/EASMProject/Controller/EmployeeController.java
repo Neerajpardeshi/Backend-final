@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.psl.training.EASMProject.Entity.AdminDetails;
 import com.psl.training.EASMProject.Entity.EmployeeData;
 import com.psl.training.EASMProject.Entity.Employee_score;
+import com.psl.training.EASMProject.Service.AdminService;
 import com.psl.training.EASMProject.Service.EmployeeService;
 import com.psl.training.EASMProject.Service.scoreService;
 
@@ -26,6 +28,9 @@ public class EmployeeController
 	
 	@Autowired
 	private scoreService scoreservice;
+	
+	@Autowired
+	private AdminService adminservice;
 	
 	
 	//create api to insert data in table
@@ -91,6 +96,22 @@ public class EmployeeController
 	public Iterable<Employee_score> showscore(){
 		return scoreservice.showscore();
 		
+	}
+	
+	//create api to insert admin details in admin_details table
+	@PostMapping("/insertadmin")
+	public String insertAdmin(@RequestBody AdminDetails data) {
+		adminservice.saveAdminData(data);
+		return "Admin "+data.getFirstname()+" registered successfully";
+	}
+	
+	//create api to authenticate admin using adminId and password
+	@GetMapping("/login/{id}/{password}")
+	public boolean authenticateAdmin(@PathVariable int id,@PathVariable String password)
+	{
+		if(adminservice.authenticateAdminData(id,password))
+			return true;
+		return false;
 	}
 	
 }

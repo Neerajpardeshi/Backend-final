@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.psl.training.EASMProject.Entity.AdminDetails;
 import com.psl.training.EASMProject.Entity.EmployeeData;
 import com.psl.training.EASMProject.Repository.EmployeeRepository;
 
