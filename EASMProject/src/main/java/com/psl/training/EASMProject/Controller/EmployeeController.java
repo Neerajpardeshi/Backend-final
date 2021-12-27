@@ -109,11 +109,11 @@ public class EmployeeController
 	//create api to authenticate admin using adminId and password
 	@GetMapping("/login/{id}/{password}")
 	@CrossOrigin
-	public boolean authenticateAdmin(@PathVariable int id,@PathVariable String password)
+	public String authenticateAdmin(@PathVariable int id,@PathVariable String password)
 	{
 		if(adminservice.authenticateAdminData(id,password))
-			return true;
-		return false;
+			return "Admin details found";
+		return "Admin details not found";
 	}
 	
 }
